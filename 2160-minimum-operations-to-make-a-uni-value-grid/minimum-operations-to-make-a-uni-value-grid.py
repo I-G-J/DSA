@@ -1,27 +1,21 @@
 class Solution:
     def minOperations(self, grid: List[List[int]], x: int) -> int:
-        arr = []
+        nums = []
 
-        # flatten grid
         for row in grid:
-            for v in row:
-                arr.append(v)
+            nums.extend(row)
 
-        # check divisibility
-        base = arr[0]
-        for v in arr:
-            if abs(v - base) % x != 0:
+        rem = nums[0] % x
+        for num in nums:
+            if num % x != rem:
                 return -1
 
-        # sort
-        arr.sort()
+        nums.sort()
 
-        # median
-        median = arr[len(arr)//2]
+        median = nums[len(nums) // 2]
 
-        # count operations
         ops = 0
-        for v in arr:
-            ops += abs(v - median) // x
+        for num in nums:
+            ops += abs(num - median) // x
 
         return ops
